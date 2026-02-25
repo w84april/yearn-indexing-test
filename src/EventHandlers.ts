@@ -44,6 +44,7 @@ import {
   V2UpdateManagementFee,
   V2EmergencyShutdown,
   YearnGauge,
+  GaugeRewardPaid,
 } from "generated";
 
 YearnV3Vault.Deposit.handler(async ({ event, context }) => {
@@ -859,6 +860,23 @@ YearnGauge.Transfer.handler(async ({ event, context }) => {
     value: event.params.value,
   };
   context.Transfer.set(entity);
+});
+
+YearnGauge.RewardPaid.handler(async ({ event, context }) => {
+  const entity: GaugeRewardPaid = {
+    id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
+    gaugeAddress: event.srcAddress,
+    chainId: event.chainId,
+    blockNumber: event.block.number,
+    blockTimestamp: event.block.timestamp,
+    blockHash: event.block.hash,
+    transactionHash: event.transaction.hash,
+    transactionFrom: event.transaction.from ?? event.params.user,
+    logIndex: event.logIndex,
+    user: event.params.user,
+    reward: event.params.reward,
+  };
+  context.GaugeRewardPaid.set(entity);
 });
 
 MapleTimelock.ProposalScheduled.handler(async ({ event, context }) => {

@@ -508,3 +508,19 @@ type TimelockEvent {
   votesFor: BigInt
   votesAgainst: BigInt
 }
+
+# ─── Yearn Gauge Events ─────────────────────────────────────────────────────
+
+type GaugeRewardPaid {
+  id: ID!
+  gaugeAddress: String! @index
+  chainId: Int! @index
+  blockNumber: Int! @index
+  blockTimestamp: Int! @index
+  blockHash: String!
+  transactionHash: String! @index
+  transactionFrom: String @index
+  logIndex: Int!
+  user: String! @index
+  reward: BigInt!
+}
