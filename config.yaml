@@ -292,7 +292,7 @@ networks:
   - id: 747474
     start_block: 0
     rpc_config:
-      url: ${RPC_URL_KATANA}
+      url: ${ENVIO_RPC_URL_KATANA}
     contracts:
       - name: YearnV3Vault
         address:
